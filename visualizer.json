@@ -1,0 +1,18 @@
+{
+  "videos": [
+    {
+      "path": "resources/annotations_medium_dataset_linerp_movingavg/bachata_5.json",
+      "scale": false,
+      "include_face": true,
+      "display_poses": false,
+      "display_boxes": true
+    },
+    {
+      "path": "resources/annotations/bachata_5.json",
+      "scale": false,
+      "include_face": true,
+      "display_poses": true,
+      "display_boxes": false
+    }
+  ]
+}
