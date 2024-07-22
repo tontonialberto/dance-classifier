@@ -4,6 +4,8 @@ Autore: Alberto Tontoni
 
 Matricola: 521076
 
+Corso: Machine Learning
+
 Questa relazione riassume il lavoro svolto per il progetto del corso di Machine Learning presso l'Università Roma Tre, anno accademico 2023-2024. Scopo del progetto è la realizzazione di un classificatore binario per la Human Activity Recognition (HAR) nell'ambito delle danze caraibiche: dato un breve video contenente la performance di uno o più ballerini, il classificatore deve essere in grado di distinguere tra due tipi di ballo: **salsa** e **bachata**. 
 
 ## Cenni sul dominio d'interesse
