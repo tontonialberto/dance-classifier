@@ -1,4 +1,5 @@
 *.json
 .venv
 __pycache__
-resources/
+resources/annotations*
+resources/*dataset*
