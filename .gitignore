@@ -1,4 +1,4 @@
-*.json
+
 .venv
 __pycache__
 resources/annotations*
