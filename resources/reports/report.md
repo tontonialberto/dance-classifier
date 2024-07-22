@@ -81,7 +81,7 @@ I valori soglia per il filtraggio sono stati fissati tramite esperimenti trial-a
 
 L'analisi di questi risultati è stata possibile grazie a degli script realizzati ad hoc che visualizzano un vero e proprio video a partire dai dati delle pose. A seguire la comparazione tra i dati raw di un frame rispetto a quelli filtrati:
 
-![](./resources/media/filtered_vs_unfiltered.png)
+![](/resources/media/filtered_vs_unfiltered.png)
 
 A destra le pose raw di un video "demo": oltre alla coppia di ballerini (al centro) sono presenti numerosi spettatori. A sinistra sono riportate le pose filtrate con il procedimento sopraindicato: in questo caso specifico è stato rimosso *ogni* spettatore. Per visualizzare comparative di questo genere è stato utilizzato lo script `visualizer.py`.
 
@@ -98,11 +98,11 @@ E' ora necessario trasformare i dati filtrati in un formato accettabile da un cl
 
 Utilizzando tale tecnica si ottiene un dataset in cui ciascuna osservazione è caratterizzata da circa 1600 features. Con i dati a disposizione si sono ottenute 40287 osservazioni. A seguire una rappresentazione del bilanciamento del dataset:
 
-![](./resources/media/class_distribution.png)
+![](/resources/media/class_distribution.png)
 
 Come è possibile notare, il dataset è leggermente sbilanciato in favore della classe 1 ("salsa"). Vi è anche un altro tipo di sbilanciamento, ossia tra i diversi "gruppi" costituenti il dataset: in pratica, vi sono video che contengono più osservazioni (ie. finestre) di altri. Ciò viene evidenziato dalla rappresentazione di seguito riportata:
 
-![](./resources/media/group_distribution.png)
+![](/resources/media/group_distribution.png)
 
 La barra in alto è equivalente al grafico precedente. La barra in basso rappresenta invece un video diverso per ogni tonalità di colore: si può notare come la distribuzione delle osservazioni tra i video non sia perfettamente uniforme. E' importante tenere a mente questo doppio sbilanciamento in fase di partizionamento tra dati di training/validation/test.
 
@@ -163,7 +163,7 @@ Ne deduciamo che aggiungere features di alto livello può aumentare le prestazio
 
 In questo caso l'approccio per la suddivisione train/test è più elaborato: al fine di ottenere un buon compromesso tra bilanciamento tra gruppi e quello tra le classi, si è utilizzato lo `StratifiedGroupKFold` offerto da `scikit-learn`. Teniamo a mente che il soddisfacimento di un vincolo di bilanciamento puo' andare in conflitto con l'altro. Ad esempio, `StratifiedGroupKFold` per 10 fold e un dataset sufficientemente piccolo (in termini di numero di video) può portare ai seguenti partizionamenti (in verde il test set):
 
-![](./resources/media/strat_group_tradeoff.png)
+![](/resources/media/strat_group_tradeoff.png)
 
 Notiamo però che ciascun test set include osservazioni *di soltanto una delle due classi*. In sintesi è dunque importante stabilire il numero di fold in accordo con la dimensione del dataset.
 
