@@ -6,6 +6,8 @@ Matricola: 521076
 
 Corso: Machine Learning
 
+Link al repository: https://github.com/tontonialberto/dance-classifier
+
 Questa relazione riassume il lavoro svolto per il progetto del corso di Machine Learning presso l'Università Roma Tre, anno accademico 2023-2024. Scopo del progetto è la realizzazione di un classificatore binario per la Human Activity Recognition (HAR) nell'ambito delle danze caraibiche: dato un breve video contenente la performance di uno o più ballerini, il classificatore deve essere in grado di distinguere tra due tipi di ballo: **salsa** e **bachata**. 
 
 ## Cenni sul dominio d'interesse
@@ -44,7 +46,7 @@ Per svolgere il lavoro qui trattato, i dataset disponibili in rete sono risultat
 A questo punto è necessario utilizzare la pose estimation and tracking sopra presentata per estrarre le pose dei ballerini e costruire le serie temporali. Tuttavia le caratteristiche stimate da YOLOv8 sono tutt'altro che perfette:
 - Si hanno problemi di tracciamento se la persona non è visibile o lo è solo parzialmente per numerosi frames: Questo fenomeno accade nella maggior parte dei video raccolti a causa dei frequenti scambi di posizione dei ballerini durante la performance. Ciò si traduce con diversi ID associati ad una stessa persona e quindi con delle serie temporali di durata potenzialmente molto limitata;
 - Può accadere che vi sia occlusione di alcune parti del corpo delle persone in un video. In tal caso YOLOv8 associa un valore pari a 0 sia alle coordinate (x,y) sia al valore di confidenza del punto in questione;
-- Alcuni video includono moltissimo rumore di fondo, come passanti o spettatori. Questo fenomeno si manifesta soprattutto nel video di tipologia "demo" e, in misura minore, nei video "social". Tale rumore si traduce in svariate finestre temporali che, se non eliminate, vengono etichettate con una delle due classi e possono mandare "in confusione" un modello di ML addestrato su tali dati.
+- Alcuni video includono moltissimo rumore di fondo, come passanti o spettatori. Questo fenomeno si manifesta soprattutto nei video di tipologia "demo" e, in misura minore, nei video "social". Tale rumore si traduce in svariate finestre temporali che, se non eliminate, vengono etichettate con una delle due classi e possono mandare "in confusione" un modello di ML addestrato su tali dati.
 
 Per risolvere il primo problema sarebbe necessario implementare un algoritmo di *reidentification* poichè non implementato da YOLOv8: per semplicità si è deciso di trascurare questa problematica. Sono invece state applicate delle tecniche di trattamento dei missing values e di filtraggio per ridurre l'impatto del secondo e del terzo problema.
 
@@ -98,7 +100,7 @@ E' ora necessario trasformare i dati filtrati in un formato accettabile da un cl
 
 Utilizzando tale tecnica si ottiene un dataset in cui ciascuna osservazione è caratterizzata da circa 1600 features. Con i dati a disposizione si sono ottenute 40287 osservazioni. A seguire una rappresentazione del bilanciamento del dataset:
 
-![](/resources/media/class_distribution.png)
+<img src="/resources/media/class_distribution.png" style="max-height: 200px">
 
 Come è possibile notare, il dataset è leggermente sbilanciato in favore della classe 1 ("salsa"). Vi è anche un altro tipo di sbilanciamento, ossia tra i diversi "gruppi" costituenti il dataset: in pratica, vi sono video che contengono più osservazioni (ie. finestre) di altri. Ciò viene evidenziato dalla rappresentazione di seguito riportata:
 
@@ -152,10 +154,10 @@ A seguire un riepilogo dei risultati ottenuti:
 
 | Modello                     | F1 0 (raw) | F1 1 (raw) | F1 avg (raw) | F1 0 (hlf) | F1 1 (hlf) | F1 avg (hlf) | F1 0 (stats) | F1 1 (stats) | F1 avg (stats) |
 | --------------------------- | ---------------------- | ---------------------- | ------------------------ | ---------------------- | ---------------------- | ------------------------ | ------------------------ | ------------------------ | -------------------------- |
-| SGD                         | 0.6                    | 0.66                   | 0.63                     | 0.66                   | 0.72                   | 0.69                     | 0.57                     | 0.67                     | 0.62                       |
-| Random Forest               | 0.65                   | 0.76                   | 0.705                    | 0.67                   | 0.76                   | 0.715                    | 0.65                     | 0.72                     | 0.685                      |
-| Histogram Gradient Boosting | 0.65                   | 0.75                   | 0.70                     | 0.64                   | 0.74                   | 0.69                     | 0.64                     | 0.72                     | 0.68                       |
-| SVM RBF                     | 0.69                   | 0.77                   | 0.73                     | 0.68                   | 0.75                   | 0.715                    | 0.68                     | 0.75                     | 0.715 |
+| SGD                         | 0.6                    | 0.66                   | **0.63**                     | 0.66                   | 0.72                   | **0.69**                     | 0.57                     | 0.67                     | **0.62**                       |
+| Random Forest               | 0.65                   | 0.76                   | **0.705**                    | 0.67                   | 0.76                   | **0.715**                    | 0.65                     | 0.72                     | **0.685**                      |
+| Histogram Gradient Boosting | 0.65                   | 0.75                   | **0.70**                     | 0.64                   | 0.74                   | **0.69**                     | 0.64                     | 0.72                     | **0.68**                       |
+| SVM RBF                     | 0.69                   | 0.77                   | **0.73**                     | 0.68                   | 0.75                   | **0.715**                    | 0.68                     | 0.75                     | **0.715** |
 
 Ne deduciamo che aggiungere features di alto livello può aumentare le prestazioni. Il caso più evidente è SGD che passa dal 63% al 69%. In altri casi le prestazioni peggiorano. E' probabile che i modelli siano andati in overfitting.
 
